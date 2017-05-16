@@ -1,0 +1,35 @@
+﻿@using System.Data;
+@{
+    ViewBag.Title = "Index";
+    DataTable table = (DataTable)ViewBag.table;
+}
+
+<h2>Index</h2>
+<table class="table">
+    <tr>
+        @{ 
+            for (var i = 0; i < table.Columns.Count; i++)
+            {
+                <th>
+                    @table.Columns[i];
+                </th>
+            }
+        }
+    </tr>
+    @{ 
+        for (var i = 0; i < table.Rows.Count; i++)
+        {
+            <tr>
+                @{
+                    for (var j = 0;j<table.Columns.Count;j++)
+                    {
+                        <td>
+                            @table.Rows[i][j]
+                        </td>
+                    }
+                 }
+            </tr>
+            
+        }
+    }
+</table>

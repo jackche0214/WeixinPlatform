@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeixinMenu", "WeixinMenu\WeixinMenu.csproj", "{DB56E6B7-C096-4982-8B93-63D63530479B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LinkAbout", "LinkAbout\LinkAbout.csproj", "{18F7218F-B06C-4BF4-A7C9-918F6BAFCBFD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Biz", "Biz\Biz.csproj", "{00F98BDB-1795-4638-8139-61CCD39DBF17}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DB56E6B7-C096-4982-8B93-63D63530479B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB56E6B7-C096-4982-8B93-63D63530479B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB56E6B7-C096-4982-8B93-63D63530479B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB56E6B7-C096-4982-8B93-63D63530479B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18F7218F-B06C-4BF4-A7C9-918F6BAFCBFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18F7218F-B06C-4BF4-A7C9-918F6BAFCBFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18F7218F-B06C-4BF4-A7C9-918F6BAFCBFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18F7218F-B06C-4BF4-A7C9-918F6BAFCBFD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00F98BDB-1795-4638-8139-61CCD39DBF17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00F98BDB-1795-4638-8139-61CCD39DBF17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00F98BDB-1795-4638-8139-61CCD39DBF17}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00F98BDB-1795-4638-8139-61CCD39DBF17}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

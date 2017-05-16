@@ -1,0 +1,4 @@
+E:\project\VS\WeixinMenu\LinkAbout\bin\Release\LinkAbout.dll
+E:\project\VS\WeixinMenu\LinkAbout\bin\Release\LinkAbout.pdb
+E:\project\VS\WeixinMenu\LinkAbout\obj\Release\LinkAbout.dll
+E:\project\VS\WeixinMenu\LinkAbout\obj\Release\LinkAbout.pdb

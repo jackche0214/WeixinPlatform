@@ -1,0 +1,5 @@
+E:\project\VS\WeixinMenu\Biz\bin\Release\Biz.dll
+E:\project\VS\WeixinMenu\Biz\bin\Release\Biz.pdb
+E:\project\VS\WeixinMenu\Biz\obj\Release\Biz.csprojResolveAssemblyReference.cache
+E:\project\VS\WeixinMenu\Biz\obj\Release\Biz.dll
+E:\project\VS\WeixinMenu\Biz\obj\Release\Biz.pdb

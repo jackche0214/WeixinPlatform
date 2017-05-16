@@ -1,0 +1,5 @@
+E:\project\VS\WeixinMenu\LinkAbout\bin\Debug\LinkAbout.dll
+E:\project\VS\WeixinMenu\LinkAbout\bin\Debug\LinkAbout.pdb
+E:\project\VS\WeixinMenu\LinkAbout\obj\Debug\LinkAbout.csprojResolveAssemblyReference.cache
+E:\project\VS\WeixinMenu\LinkAbout\obj\Debug\LinkAbout.dll
+E:\project\VS\WeixinMenu\LinkAbout\obj\Debug\LinkAbout.pdb
