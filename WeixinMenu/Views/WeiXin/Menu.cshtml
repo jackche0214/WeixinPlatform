@@ -1,9 +1,201 @@
-﻿@section header{
-    
-    }
-@{
-    ViewBag.Title = "Menu";
+﻿@{
+    Layout = "~/Views/Shared/_GridView.cshtml";
 }
 
-<h2>Menu</h2>
+@section header {
+
+}
+
+@section body {
+    <div id="dataGrid" class="easyui-layout" data-options="fit:true">
+        <table id="gridView"></table>
+    </div>
+}
+
+@section scripts {
+    <script src="~/Content/oa/scripts/xlayout.js"></script>
+    <script type="text/javascript">
+        $(function () {
+            load();
+        });
+
+        function load() {
+            $('#gridView').treegrid({
+                url: '/OA/WeiXin/MenuGridView',
+                title: '微信菜单配置',
+                treeField: 'Text',
+                fit: true,
+                fitColumns: true,
+                idField: 'Id',
+                loadMsg: '数据正在加载中......',
+                sortName: 'Orderby',
+                sortOrder: 'asc',
+                pagination: false,
+                singleSelect: true,
+                pageNumber: 1,
+                queryParams: {},
+                rownumbers: true,
+                checkOnSelect: false,
+                selectOnCheck: false,
+                lines: true,
+                columns: [[
+                        { field: 'ck', checkbox: true, width: 50 },
+                        { field: 'Text', title: '菜单名字', width: 160, align: 'left' },
+                        {
+                            field: 'MenuId', title: '菜单编码', width: 100, align: 'left',
+                            formatter: function (value, row, index) {
+                                return value == "-1" ? "" : value;
+                            }
+                        },
+                        {
+                            field: 'IsEnable', title: '有效', width: 50, align: 'center',
+                            formatter: function (value, row, index) {
+                                return "<span style=\"color:{1};\">{0}</span>".format(
+                                    value == "1" ? "已启用" : "已禁用",
+                                    value == "1" ? "green" : "red");
+                            }
+                        },
+                        { field: 'OrderBy', title: '排序号', width: 80, align: 'left' },
+                        {
+                            field: 'Target', title: '动作类型', width: 100, align: 'center',
+                            formatter: function (value, row, index) {
+                                switch (value) {
+                                    case 'view':
+                                        return "跳转URL";
+                                    case 'click':
+                                        return "点击推事件";
+                                    case 'scancode_push':
+                                        return "扫码推事件";
+                                    case 'scancode_waitmsg':
+                                        return "扫码推事件且弹出(消息接收中)提示框";
+                                    case 'pic_sysphoto':
+                                        return "弹出系统拍照发图";
+                                    case 'pic_photo_or_album':
+                                        return "弹出拍照或者相册发图";
+                                    case 'pic_weixin':
+                                        return "弹出微信相册发图器";
+                                    case 'location_select':
+                                        return "弹出地理位置选择器";
+                                    case 'media_id':
+                                        return "下发消息（除文本消息）";
+                                    case 'view_limited':
+                                        return "跳转图文消息URL";
+                                }
+                            }
+                        },
+                        { field: 'Ico', title: 'MenuKey', width: 100, align: 'left' },
+                        { field: 'Url', title: '菜单URL', width: 300, align: 'left' }
+                ]],
+                toolbar: [{
+                    id: 'btnAdd',
+                    text: '添加',
+                    iconCls: 'icon-add',
+                    handler: function () {
+                        showWindow("添加菜单", "/OA/WeiXin/MenuEdit/0", 700, 400);
+                    }
+                }, {
+                    id: 'btnAdd',
+                    text: '编辑',
+                    iconCls: 'icon-edit',
+                    handler: function () {
+                        var row = $('#gridView').datagrid('getSelected');
+                        if (!row) {
+                            showMsg("系统提示", "请选择要编辑的行", true);
+                            return;
+                        }
+                        if (row.Id == "0") {
+                            showMsg("系统提示", "此数据不能修改", true);
+                            return;
+                        }
+
+                        showWindow("添加菜单", "/OA/WeiXin/MenuEdit/" + row.Id, 700, 400);
+                    }
+                },
+                {
+                    id: 'btnDelete',
+                    text: '删除',
+                    iconCls: 'icon-remove',
+                    handler: function () {
+                        var rows = $('#gridView').datagrid('getChecked');
+                        if (!rows || rows.length == 0) {
+                            showMsg("系统提示", "请选择要删除的行", true);
+                            return;
+                        }
+
+                        showConfirm('系统提示', '删除数据后将无法恢复，还确认删除吗?', function () {
+                            var ids = new Array();
+                            var isRoot = false;
+                            $.each(rows, function (i, n) {
+                                ids.push("'" + n.Id + "'");
+                                isRoot = n.MenuId == "10000";
+                                if (isRoot) return false;
+                            });
+                            if (isRoot) {
+                                showMsg("系统提示", "菜单(微信公众平台菜单)不能删除！", true);
+                                return;
+                            }
+
+                            showProcess(true, "系统提示", "正在删除中......");
+                            setTimeout(function () {
+                                $.ajax({
+                                    url: "/OA/WeiXin/MenuDelete",
+                                    data: { ids: ids.toString(",") },
+                                    dataType: "json",
+                                    type: "POST",
+                                    traditional: true,
+                                    success: function (result) {
+                                        showProcess(false);
+                                        if (result.Success) {
+                                            showMsg("系统提示", result.Message, false);
+                                            $('#gridView').datagrid('reload');
+                                        } else {
+                                            showMsg("系统提示", result.Message, true);
+                                        }
+                                    }
+                                });
+                            }, 2000);
+                        });
+                    }
+                }, {
+                    id: 'btnRefresh',
+                    text: '更新',
+                    iconCls: 'icon-reload',
+                    handler: function () {
+                        $('#gridView').treegrid('reload');
+                    }
+                }, {
+                    id: 'btnRefresh',
+                    text: '发布到微信公众平台',
+                    iconCls: 'icon-redo',
+                    handler: function () {
+                        $.ajax({
+                            url: "/OA/WeiXin/MenuToWeiXin",
+                            data: {},
+                            dataType: "json",
+                            type: "POST",
+                            traditional: true,
+                            beforeSend: function () {
+                                showProcess(true, "系统提示", "正发布到微信公众平台......");
+                            },
+                            error: function () {
+                            },
+                            success: function (result) {
+                                showMsg("系统提示", result.Message, false);
+                            },
+                            complete: function () {
+                                showProcess(false);
+                            }
+                        });
+                    }
+                }]
+            });
+        }
+
+        function radWindowCallBackFn() {
+            showMsg("系统提示", "存盘成功！", false);
+            $('#gridView').treegrid('reload');
+        }
+    </script>
+}
+
 

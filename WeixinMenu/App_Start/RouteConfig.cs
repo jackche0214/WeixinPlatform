@@ -16,7 +16,7 @@ namespace WeixinMenu
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Menu", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "WeiXin", action = "Menu", id = UrlParameter.Optional }
             );
         }
     }
